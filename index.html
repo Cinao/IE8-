@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>js alert confirm样式弹出框</title>
+<!--<link type="text/css" rel="stylesheet" href="css/showBo.css" />-->
+<style type="text/css">
+.sure{ 
+	width:56px; 
+	border-radius: 3px; 
+	font-family:微软雅黑; 
+	cursor:pointer; 
+	color:#fff; 
+	height:25px;  
+	background-color:#72D1FF;
+	font-size:14px;
+	text-align:center;
+	line-height:25px;
+	position:absolute; 
+	right:120px; 
+	top:110px; 
+	}
+.sure:hover{background-color:#ffbd1d;}
+#mask{ 
+	background-color:#ccc;
+	opacity:0.5;
+	filter: alpha(opacity=50); 
+	position:absolute; 
+	left:0;
+	top:0;
+	z-index:1000;
+
+	}
+#login,#logins{ 
+	position:fixed;
+	z-index:1001;
+	}
+.loginCon,.loginCon2{ 
+	position:relative; 
+	width:300px;
+	height:150px;
+	border:1px solid #fff;
+	border-radius:5px;
+	}
+.loginCon .cue{ background:#479ec9; padding-left:16px; color:#fff; height:30px; padding-top:10px; border:1px solid #479ec9;border-radius:5px 5px 0 0;}
+.loginCon .pop{width:300px;  background:#fff; height:108px; border-radius:0 0 5px 5px ;}
+.loginCon .pop p{ padding:0; margin:0; text-align:center; color:#2b9bc5; padding-top:25px;}
+</style>
+<script>
+//class获取元素
+function getByClass(oParent,className){
+	var elements=oParent.getElementsByClassName(className);
+	var arrEl=[];
+	for(var i=0;i<elements.length;i++){
+		if(elements[i].className==className){
+			arrEl.push(elements[i]);
+			}	
+		}
+		return arrEl;
+	}
+	
+//openNew1
+function openNew(){
+	//获取页面的高度和宽度
+	var sWidth=document.body.scrollWidth;
+	var sHeight=document.body.scrollHeight;
+	
+	//获取页面的可视区域高度和宽度
+	var wHeight=document.documentElement.clientHeight;
+	
+	var oMask=document.createElement("div");
+		oMask.id="mask";
+		oMask.style.height=sHeight+"px";
+		//oMask.style.width=sWidth+"px";
+		oMask.style.width="100%";
+		document.body.appendChild(oMask);
+	var oLogin=document.createElement("div");
+		oLogin.id="login";
+		oLogin.innerHTML="<div class='loginCon'><div class='cue'>提示</div><div class='pop'><p>您好，请先注册或登录！</p><div id='close' class='sure'>确认</div></div></div>";
+		document.body.appendChild(oLogin);
+	
+	//获取登陆框的宽和高
+	var dHeight=oLogin.offsetHeight;
+	var dWidth=oLogin.offsetWidth;
+		//设置登陆框的left和top
+		oLogin.style.left=sWidth/2-dWidth/2+"px";
+		oLogin.style.top=wHeight/2-dHeight/2+"px";
+	//点击关闭按钮
+	var oClose=document.getElementById("close");
+	
+		//点击登陆框以外的区域也可以关闭登陆框
+		oClose.onclick=oMask.onclick=function(){
+					document.body.removeChild(oLogin);
+					document.body.removeChild(oMask);
+					};
+		};
+					
+				
+//openNew2
+function openNew2(){
+	//获取页面的高度和宽度
+	var sWidth=document.body.scrollWidth;
+	var sHeight=document.body.scrollHeight;
+	
+	//获取页面的可视区域高度和宽度
+	var wHeight=document.documentElement.clientHeight;
+	
+	var oMask=document.createElement("div");
+		oMask.id="mask";
+		oMask.style.height=sHeight+"px";
+		//oMask.style.width=sWidth+"px";
+		oMask.style.width="100%";
+		document.body.appendChild(oMask);
+	var oLogin=document.createElement("div");
+		oLogin.id="login";
+		oLogin.innerHTML="<div class='loginCon'><div class='cue'>提示</div><div class='pop'><p>您好，请先注册或登录！</p><div id='close' class='sure'>取消</div></div></div>";
+		document.body.appendChild(oLogin);
+	
+	//获取登陆框的宽和高
+	var dHeight=oLogin.offsetHeight;
+	var dWidth=oLogin.offsetWidth;
+		//设置登陆框的left和top
+		oLogin.style.left=sWidth/2-dWidth/2+"px";
+		oLogin.style.top=wHeight/2-dHeight/2+"px";
+	//点击关闭按钮
+	var oClose=document.getElementById("close");
+	
+		//点击登陆框以外的区域也可以关闭登陆框
+		oClose.onclick=oMask.onclick=function(){
+					document.body.removeChild(oLogin);
+					document.body.removeChild(oMask);
+					};
+					};
+					
+	window.onload=function(){
+		
+		var bd=document.getElementById('bd');
+		var btn1s=window.getByClass(bd,'login-btn1');
+		for(var i=0;i<btn1s.length;i++){
+			btn1s[i].onclick=function(){
+					openNew();
+					return false;
+					}
+			}
+			
+		var btn2s=window.getByClass(bd,'login-btn2');
+		for(var i=0;i<btn2s.length;i++){
+			btn2s[i].onclick=function(){
+					openNew2();
+					return false;
+					}
+			}
+
+		}
+</script>
+</head>
+<body >
+<!--<a href="" class="login-btn" style="width:35px; height:20px; background:#000; display:block; color:#fff;">体验</a>-->
+<div id="bd">  
+	<div class="" style="height:2000px;">
+		<input type="button" value="Showbo.Msg.alert" class="login-btn1" >
+    </div>
+		<input type="button" value="Showbo.Msg.alert" class="login-btn2">
+</div>
+</body>
+</html>
